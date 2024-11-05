@@ -132,3 +132,7 @@ dist
 /CrmApi/CrmApi/bin
 /CrmApi/CrmApi/obj
 CrmApi/CrmApi/CrmApi.csproj.user
+/CrmServices/.vs
+/CrmServices/CrmApi/bin
+*.user
+/CrmServices/CrmApi/obj
