@@ -5,6 +5,8 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrmApi", "CrmApi\CrmApi.csproj", "{8DAC63B6-0A3A-4815-AFEA-D97C06585578}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrmApi.Tests", "CrmApi.Tests\CrmApi.Tests.csproj", "{8FB33853-A79F-44D0-9245-E8D94DAC563D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{8DAC63B6-0A3A-4815-AFEA-D97C06585578}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DAC63B6-0A3A-4815-AFEA-D97C06585578}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DAC63B6-0A3A-4815-AFEA-D97C06585578}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FB33853-A79F-44D0-9245-E8D94DAC563D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FB33853-A79F-44D0-9245-E8D94DAC563D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FB33853-A79F-44D0-9245-E8D94DAC563D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FB33853-A79F-44D0-9245-E8D94DAC563D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
