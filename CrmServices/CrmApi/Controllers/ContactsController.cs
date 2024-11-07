@@ -1,6 +1,6 @@
-using AutoMapper;
 using CrmApi.BusinessLogic;
 using CrmApi.Contracts;
+using CrmApi.Mappers;
 using CrmApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,21 +10,21 @@ namespace CrmApi.Controllers
     [ApiController]
     public class ContactsController : ControllerBase
     {
-        private readonly IMapper mapper;
         private readonly ContactsBusinessLogic contactsBusinessLogic;
+        private readonly ContactMapper contactMapper;
 
-        public ContactsController(ContactsBusinessLogic contactsBusinessLogic, IMapper mapper)
+        public ContactsController(ContactsBusinessLogic contactsBusinessLogic, ContactMapper contactMapper)
         {
             this.contactsBusinessLogic = contactsBusinessLogic;
-            this.mapper = mapper;
+            this.contactMapper = contactMapper;
         }
 
         [HttpPost]
         public async Task<ActionResult<ContactResponse>> CreateContact([FromBody] CreateContactRequest request)
         {
-            Contact contact = mapper.Map<Contact>(request);
+            Contact contact = contactMapper.CreateContactRequestToContacMapper(request);
             Contact result = await contactsBusinessLogic.CreateContactAsync(contact);
-            ContactResponse response = mapper.Map<ContactResponse>(result);
+            ContactResponse response = contactMapper.ConvertContactToContactResponse(result);
             return CreatedAtAction(nameof(GetContact), new { id = response.Id }, response);
         }
 
@@ -32,7 +32,7 @@ namespace CrmApi.Controllers
         public async Task<ActionResult<ContactResponse>> GetContact(string id)
         {
             Contact result = await contactsBusinessLogic.GetContactAsync(id);
-            ContactResponse response = mapper.Map<ContactResponse>(result);
+            ContactResponse response = contactMapper.ConvertContactToContactResponse(result);
             return Ok(response);
         }
     }

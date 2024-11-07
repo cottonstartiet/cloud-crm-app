@@ -137,3 +137,4 @@ CrmApi/CrmApi/CrmApi.csproj.user
 *.user
 /CrmServices/CrmApi/obj
 /CrmServices/CrmApi.Tests/obj
+/CrmServices/CrmApi.Tests/bin
