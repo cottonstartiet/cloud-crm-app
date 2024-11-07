@@ -8,16 +8,8 @@ namespace CrmApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ContactsController : ControllerBase
+    public class ContactsController(ContactsBusinessLogic contactsBusinessLogic, ContactMapper contactMapper) : ControllerBase
     {
-        private readonly ContactsBusinessLogic contactsBusinessLogic;
-        private readonly ContactMapper contactMapper;
-
-        public ContactsController(ContactsBusinessLogic contactsBusinessLogic, ContactMapper contactMapper)
-        {
-            this.contactsBusinessLogic = contactsBusinessLogic;
-            this.contactMapper = contactMapper;
-        }
 
         [HttpPost]
         public async Task<ActionResult<ContactResponse>> CreateContact([FromBody] CreateContactRequest request)
