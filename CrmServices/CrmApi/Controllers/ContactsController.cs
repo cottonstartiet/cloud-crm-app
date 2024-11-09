@@ -26,8 +26,14 @@ namespace CrmApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ContactResponse>> GetContact(string id)
         {
-            Contact result = await contactsBusinessLogic.GetContactAsync(id);
-            ContactResponse response = contactMapper.ConvertContactToContactResponse(result);
+            Contact? contact = await contactsBusinessLogic.GetContactAsync(id);
+
+            if (contact == null)
+            {
+                return NotFound();
+            }
+
+            ContactResponse response = contactMapper.ConvertContactToContactResponse(contact);
             return Ok(response);
         }
     }

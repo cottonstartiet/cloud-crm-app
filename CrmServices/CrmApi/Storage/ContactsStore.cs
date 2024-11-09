@@ -1,5 +1,6 @@
 ﻿using CrmApi.Storage.Entities;
 using Microsoft.Azure.Cosmos;
+using System.Net;
 
 namespace CrmApi.Storage
 {
@@ -12,10 +13,21 @@ namespace CrmApi.Storage
             contactsContainer = cosmosDbService.ContactsContainer;
         }
 
-        public async Task<ContactDao> GetItemAsync(string id, string partitionKey)
+        public async Task<ContactDao?> GetItemAsync(string id, string partitionKey)
         {
-            ItemResponse<ContactDao> response = await contactsContainer.ReadItemAsync<ContactDao>(id, new PartitionKey(partitionKey));
-            return response.Resource;
+            try
+            {
+                ItemResponse<ContactDao> response = await contactsContainer.ReadItemAsync<ContactDao>(id, new PartitionKey(partitionKey));
+                return response.Resource;
+            }
+            catch (CosmosException ex)
+            {
+                if (ex.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return null;
+                }
+                throw;
+            }
         }
 
         public async Task<ContactDao> CreateOrUpdateItemAsync(ContactDao contactDao)
