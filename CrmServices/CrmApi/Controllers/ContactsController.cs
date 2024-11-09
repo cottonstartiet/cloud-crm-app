@@ -26,7 +26,7 @@ namespace CrmApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ContactResponse>> GetContact(string id)
         {
-            Contact? contact = await contactsBusinessLogic.GetContactAsync(id);
+            Contact? contact = await contactsBusinessLogic.GetContactByIdAsync(id);
 
             if (contact == null)
             {

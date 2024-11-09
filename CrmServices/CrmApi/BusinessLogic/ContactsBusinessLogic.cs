@@ -10,7 +10,7 @@ public class ContactsBusinessLogic(ContactsManager contactsManager)
         return await contactsManager.CreateContactAsync(contact);
     }
 
-    internal async Task<Contact?> GetContactAsync(string id)
+    internal async Task<Contact?> GetContactByIdAsync(string id)
     {
         return await contactsManager.GetContactByIdAsync(id);
     }
