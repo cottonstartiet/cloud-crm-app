@@ -1,5 +1,6 @@
-﻿using CrmApi.Utils;
+﻿using CrmApi.Configurations;
 using Microsoft.Azure.Cosmos;
+using Microsoft.Extensions.Options;
 
 namespace CrmApi.Storage
 {
@@ -7,13 +8,23 @@ namespace CrmApi.Storage
     {
         private readonly CosmosClient cosmosClient;
         private readonly Database crmDatabase;
+
+        private const string CONTACTS_CONTAINER = "Contacts";
+
         public Container ContactsContainer { get; set; }
 
-        public CosmosDbService(string connectionString, string databaseName, CosmosDbConfig config)
+        public CosmosDbService(IOptions<CosmosDbConfig> config)
         {
-            cosmosClient = new CosmosClient(connectionString);
-            crmDatabase = cosmosClient.GetDatabase(config.DatabaseName);
-            ContactsContainer = crmDatabase.GetContainer("Contacts");
+            CosmosClientOptions cosmosClientOptions = new()
+            {
+                SerializerOptions = new CosmosSerializationOptions
+                {
+                    PropertyNamingPolicy = CosmosPropertyNamingPolicy.CamelCase
+                }
+            };
+            cosmosClient = new CosmosClient(config.Value.ConnectionString, cosmosClientOptions);
+            crmDatabase = cosmosClient.GetDatabase(config.Value.DatabaseName);
+            ContactsContainer = crmDatabase.GetContainer(CONTACTS_CONTAINER);
         }
     }
 }

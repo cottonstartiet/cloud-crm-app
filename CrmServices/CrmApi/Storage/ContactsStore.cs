@@ -1,4 +1,4 @@
-﻿using CrmApi.Models;
+﻿using CrmApi.Storage.Entities;
 using Microsoft.Azure.Cosmos;
 
 namespace CrmApi.Storage
@@ -12,14 +12,15 @@ namespace CrmApi.Storage
             contactsContainer = cosmosDbService.ContactsContainer;
         }
 
-        public async Task<Contact> GetItemAsync(string id)
+        public async Task<ContactDao> GetItemAsync(string id)
         {
-            return await contactsContainer.ReadItemAsync<Contact>(id, new PartitionKey(id));
+            return await contactsContainer.ReadItemAsync<ContactDao>(id, new PartitionKey(id));
         }
 
-        public async Task<Contact> CreateOrUpdateItemAsync(Contact contact)
+        public async Task<ContactDao> CreateOrUpdateItemAsync(ContactDao contactDao)
         {
-            return await contactsContainer.UpsertItemAsync(contact, new PartitionKey(contact.Id));
+            ItemResponse<ContactDao> response = await contactsContainer.UpsertItemAsync(contactDao, new PartitionKey(contactDao.Id));
+            return response.Resource;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace CrmApi.Utils
+﻿namespace CrmApi.Configurations
 {
     public class CosmosDbConfig
     {

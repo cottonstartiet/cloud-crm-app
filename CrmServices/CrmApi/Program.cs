@@ -1,6 +1,8 @@
 using CrmApi.BusinessLogic;
+using CrmApi.Configurations;
+using CrmApi.Domain;
 using CrmApi.Mappers;
-using CrmApi.Utils;
+using CrmApi.Storage;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,10 @@ builder.Services.Configure<CosmosDbConfig>(builder.Configuration.GetSection(Cosm
 builder.Services.AddSingleton<ContactMapper>();
 
 // Add Applicaiton Classes
+builder.Services.AddSingleton<CosmosDbConfig>();
+builder.Services.AddSingleton<CosmosDbService>();
+builder.Services.AddSingleton<ContactsStore>();
+builder.Services.AddSingleton<ContactsManager>();
 builder.Services.AddSingleton<ContactsBusinessLogic>();
 
 

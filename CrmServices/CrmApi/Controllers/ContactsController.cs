@@ -15,6 +15,7 @@ namespace CrmApi.Controllers
         public async Task<ActionResult<ContactResponse>> CreateContact([FromBody] CreateContactRequest request)
         {
             Contact contact = contactMapper.CreateContactRequestToContacMapper(request);
+            contact.Id = Guid.NewGuid().ToString();
             Contact result = await contactsBusinessLogic.CreateContactAsync(contact);
             ContactResponse response = contactMapper.ConvertContactToContactResponse(result);
             logger.LogInformation("Contact created with id {id}", response.Id);
@@ -23,11 +24,11 @@ namespace CrmApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ContactResponse>> GetContact(string id)
+        public ActionResult<ContactResponse> GetContact(string id)
         {
-            Contact result = await contactsBusinessLogic.GetContactAsync(id);
-            ContactResponse response = contactMapper.ConvertContactToContactResponse(result);
-            return Ok(response);
+            //Contact result = await contactsBusinessLogic.GetContactAsync(id);
+            //ContactResponse response = contactMapper.ConvertContactToContactResponse(result);
+            return Ok();
         }
     }
 }

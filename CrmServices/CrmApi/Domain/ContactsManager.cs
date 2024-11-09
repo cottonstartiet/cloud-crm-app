@@ -1,17 +1,15 @@
+using CrmApi.Mappers;
 using CrmApi.Models;
 using CrmApi.Storage;
 
 namespace CrmApi.Domain;
 
-public class ContactsManager(ContactsStore contactsStore)
+public class ContactsManager(ContactsStore contactsStore, ContactMapper contactMapper)
 {
     public async Task<Contact> CreateContactAsync(Contact contact)
     {
-        return await contactsStore.CreateOrUpdateItemAsync(contact);
-    }
-
-    internal async Task<Contact> GetContactByIdAsync(string id)
-    {
-        throw new NotImplementedException();
+        Storage.Entities.ContactDao contactDao = contactMapper.ConvertContactToContactDao(contact);
+        _ = await contactsStore.CreateOrUpdateItemAsync(contactDao);
+        return contactMapper.ConvertContactDaoToContact(contactDao);
     }
 }
