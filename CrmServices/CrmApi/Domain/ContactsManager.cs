@@ -12,4 +12,10 @@ public class ContactsManager(ContactsStore contactsStore, ContactMapper contactM
         _ = await contactsStore.CreateOrUpdateItemAsync(contactDao);
         return contactMapper.ConvertContactDaoToContact(contactDao);
     }
+
+    internal async Task<Contact> GetContactByIdAsync(string id)
+    {
+        Storage.Entities.ContactDao contactDao = await contactsStore.GetItemAsync(id, id);
+        return contactMapper.ConvertContactDaoToContact(contactDao);
+    }
 }

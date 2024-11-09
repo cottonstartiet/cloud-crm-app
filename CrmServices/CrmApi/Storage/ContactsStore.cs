@@ -12,9 +12,10 @@ namespace CrmApi.Storage
             contactsContainer = cosmosDbService.ContactsContainer;
         }
 
-        public async Task<ContactDao> GetItemAsync(string id)
+        public async Task<ContactDao> GetItemAsync(string id, string partitionKey)
         {
-            return await contactsContainer.ReadItemAsync<ContactDao>(id, new PartitionKey(id));
+            ItemResponse<ContactDao> response = await contactsContainer.ReadItemAsync<ContactDao>(id, new PartitionKey(partitionKey));
+            return response.Resource;
         }
 
         public async Task<ContactDao> CreateOrUpdateItemAsync(ContactDao contactDao)
