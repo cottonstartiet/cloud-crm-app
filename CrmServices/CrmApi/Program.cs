@@ -1,5 +1,6 @@
 using CrmApi.BusinessLogic;
 using CrmApi.Mappers;
+using CrmApi.Utils;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -10,9 +11,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Add configurations
+builder.Services.Configure<CosmosDbConfig>(builder.Configuration.GetSection(CosmosDbConfig.ConfigName));
+
 // Add Mappers
 builder.Services.AddSingleton<ContactMapper>();
 
+// Add Applicaiton Classes
 builder.Services.AddSingleton<ContactsBusinessLogic>();
 
 

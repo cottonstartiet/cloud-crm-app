@@ -1,20 +1,25 @@
-﻿using Microsoft.Azure.Cosmos;
+﻿using CrmApi.Models;
+using Microsoft.Azure.Cosmos;
 
 namespace CrmApi.Storage
 {
-    public class ContactsStore()
+    public class ContactsStore
     {
-        private readonly CosmosClient cosmosClient;
         private readonly Container contactsContainer;
 
         public ContactsStore(CosmosDbService cosmosDbService)
         {
-            cosmosClient = cosmosDbService.GetClient();
-            contactsContainer = cosmos
+            contactsContainer = cosmosDbService.ContactsContainer;
         }
-        public async Task<Contact> CreateItemAsync(Contact contact)
+
+        public async Task<Contact> GetItemAsync(string id)
         {
-            return await contactsContainer..contact;
+            return await contactsContainer.ReadItemAsync<Contact>(id, new PartitionKey(id));
+        }
+
+        public async Task<Contact> CreateOrUpdateItemAsync(Contact contact)
+        {
+            return await contactsContainer.UpsertItemAsync(contact, new PartitionKey(contact.Id));
         }
     }
 }
