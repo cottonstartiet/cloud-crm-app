@@ -2,23 +2,26 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 
-const FIREBASE_API_KEY = process.env.FIREBASE_API_KEY;
-const FIREBASE_AUTH_DOMAIN = process.env.FIREBASE_AUTH_DOMAIN;
-const FIREBASE_PROJECT_ID = process.env.FIREBASE_PROJECT_ID;
-const FIREBASE_STORAGE_BUCKET = process.env.FIREBASE_STORAGE_BUCKET;
-const FIREBASE_MESSENGER_ID = process.env.FIREBASE_MESSENGER_ID;
-const FIREBASE_APP_ID = process.env.FIREBASE_APP_ID;
-const FIREBASE_MEASUREMENT_ID = process.env.FIREBASE_MEASUREMENT_ID;
+const VITE_FIREBASE_API_KEY = import.meta.env.VITE_FIREBASE_API_KEY;
+const VITE_FIREBASE_AUTH_DOMAIN = import.meta.env.VITE_FIREBASE_AUTH_DOMAIN;
+const VITE_FIREBASE_PROJECT_ID = import.meta.env.VITE_FIREBASE_PROJECT_ID;
+const VITE_FIREBASE_STORAGE_BUCKET = import.meta.env.VITE_FIREBASE_STORAGE_BUCKET;
+const VITE_FIREBASE_MESSENGER_ID = import.meta.env.VITE_FIREBASE_MESSENGER_ID;
+const VITE_FIREBASE_APP_ID = import.meta.env.VITE_FIREBASE_APP_ID;
+const VITE_FIREBASE_MEASUREMENT_ID = import.meta.env.VITE_FIREBASE_MEASUREMENT_ID;
+
+console.log(VITE_FIREBASE_API_KEY);
+console.log("AIzaSyDoT1yw9TT9AdBzYh6w1JZFyJEtVv92Y8o");
 
 // Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
-  apiKey: FIREBASE_API_KEY,
-  authDomain: FIREBASE_AUTH_DOMAIN,
-  projectId: FIREBASE_PROJECT_ID,
-  storageBucket: FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: FIREBASE_MESSENGER_ID,
-  appId: FIREBASE_APP_ID,
-  measurementId: FIREBASE_MEASUREMENT_ID
+  apiKey: VITE_FIREBASE_API_KEY,
+  authDomain: VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: VITE_FIREBASE_PROJECT_ID,
+  storageBucket: VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: VITE_FIREBASE_MESSENGER_ID,
+  appId: VITE_FIREBASE_APP_ID,
+  measurementId: VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
