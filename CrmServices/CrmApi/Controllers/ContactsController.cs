@@ -16,7 +16,9 @@ namespace CrmApi.Controllers
         {
             Contact contact = contactMapper.CreateContactRequestToContacMapper(request);
             contact.Id = Guid.NewGuid().ToString();
+
             Contact result = await contactsBusinessLogic.CreateContactAsync(contact);
+
             ContactResponse response = contactMapper.ConvertContactToContactResponse(result);
             logger.LogInformation("Contact created with id {id}", response.Id);
 

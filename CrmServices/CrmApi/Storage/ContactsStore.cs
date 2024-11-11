@@ -20,12 +20,12 @@ namespace CrmApi.Storage
                 ItemResponse<ContactDao> response = await contactsContainer.ReadItemAsync<ContactDao>(id, new PartitionKey(partitionKey));
                 return response.Resource;
             }
-            catch (CosmosException ex)
+            catch (CosmosException ex) when (ex.StatusCode == HttpStatusCode.NotFound)
             {
-                if (ex.StatusCode == HttpStatusCode.NotFound)
-                {
-                    return null;
-                }
+                return null;
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }
