@@ -35,4 +35,8 @@ const signInWithGoogle = () => {
   return signInWithPopup(auth, provider);
 };
 
-export { auth, signInWithGoogle };
+const logout = () => {
+  return auth.signOut();
+}
+
+export { auth, signInWithGoogle, logout };
