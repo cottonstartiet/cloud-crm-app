@@ -1,22 +1,7 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 import './App.css';
-import Home from './pages/Home';
 import { AuthProvider } from './contexts/AuthProvider';
-import NotFound from './pages/NotFound';
-import Dashboard from './pages/dashboard';
-import PrivateRoute from './pages/routing/PrivateRoute';
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Home />,
-    errorElement: <NotFound/>
-  },
-  {
-    path: '/dashboard',
-    element: <PrivateRoute children={<Dashboard />} />,
-  },
-]);
+import router from './pages/routing/Routing';
 
 function App() {
   return (
@@ -25,7 +10,5 @@ function App() {
     </AuthProvider>
   );
 }
-
-
 
 export default App;

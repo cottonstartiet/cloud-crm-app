@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { logout } from "../../firebaseConfig";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/authContext";
@@ -17,7 +17,9 @@ function Dashboard() {
     <>
     <h2>Welcome to the Dashboard</h2>
     <h1>{authInfo.currentUser?.displayName}</h1>
+    <Link to="contacts">Contacts</Link>
     <button onClick={handleLogout}>Logout</button>
+    <Outlet/>
     </>
   );
 }
