@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
 import { signInWithGoogle } from "../firebaseConfig";
 import { useEffect } from "react";
+import MarketingPage from "../marketing-page/MarketingPage";
 
 const handleLogin = async () => {
   try {
@@ -23,11 +24,12 @@ function Home() {
 
   return (
     <>
-      <div className="card">
+      {/* <div className="card">
         <button onClick={handleLogin}>
           {'Login with Google'}
         </button>
-      </div>
+      </div> */}
+      <MarketingPage/>
     </>
   );
 }

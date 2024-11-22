@@ -26,7 +26,6 @@ builder.Services.AddSingleton<ContactsStore>();
 builder.Services.AddSingleton<ContactsManager>();
 builder.Services.AddSingleton<ContactsBusinessLogic>();
 
-
 WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
