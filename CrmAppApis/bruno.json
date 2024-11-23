@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "CrmApp",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

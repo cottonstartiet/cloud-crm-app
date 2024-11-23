@@ -33,6 +33,7 @@ if (app.Environment.IsDevelopment())
 {
     _ = app.UseSwagger();
     _ = app.UseSwaggerUI();
+    _ = builder.Configuration.AddUserSecrets<Program>();
 }
 
 app.UseHttpsRedirection();
