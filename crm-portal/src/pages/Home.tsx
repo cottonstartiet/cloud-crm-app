@@ -24,11 +24,11 @@ function Home() {
 
   return (
     <>
-      {/* <div className="card">
+      <div className="card">
         <button onClick={handleLogin}>
           {'Login with Google'}
         </button>
-      </div> */}
+      </div>
       <MarketingPage/>
     </>
   );
