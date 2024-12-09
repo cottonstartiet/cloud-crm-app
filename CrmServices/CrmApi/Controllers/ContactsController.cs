@@ -38,5 +38,19 @@ namespace CrmApi.Controllers
             ContactResponse response = contactMapper.ConvertContactToContactResponse(contact);
             return Ok(response);
         }
+
+        [HttpGet]
+        public async Task<ActionResult<IList<ContactResponse>>> GetContacts([FromQuery] int limit = 10)
+        {
+            IList<Contact> contacts = await contactsBusinessLogic.GetContacts(limit);
+            IList<ContactResponse> results = new List<ContactResponse>(contacts.Count);
+
+            foreach (Contact contact in contacts)
+            {
+                results.Add(contactMapper.ConvertContactToContactResponse(contact));
+            }
+
+            return Ok(results);
+        }
     }
 }

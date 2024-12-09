@@ -19,12 +19,24 @@ builder.Services.Configure<CosmosDbConfig>(builder.Configuration.GetSection(Cosm
 // Add Mappers
 builder.Services.AddSingleton<ContactMapper>();
 
-// Add Applicaiton Classes
+// Add Application Classes
 builder.Services.AddSingleton<CosmosDbConfig>();
 builder.Services.AddSingleton<CosmosDbService>();
 builder.Services.AddSingleton<ContactsStore>();
 builder.Services.AddSingleton<ContactsManager>();
 builder.Services.AddSingleton<ContactsBusinessLogic>();
+
+string corsPolicyName = "AllowLocalReactApp";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: corsPolicyName,
+                      policy =>
+                      {
+                          _ = policy.WithOrigins("http://localhost:5173", "https://localhost:5173/")
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+                      });
+});
 
 WebApplication app = builder.Build();
 
@@ -35,6 +47,8 @@ if (app.Environment.IsDevelopment())
     _ = app.UseSwaggerUI();
     _ = builder.Configuration.AddUserSecrets<Program>();
 }
+
+app.UseCors(corsPolicyName);
 
 app.UseHttpsRedirection();
 

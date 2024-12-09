@@ -35,5 +35,30 @@ namespace CrmApi.Storage
             ItemResponse<ContactDao> response = await contactsContainer.UpsertItemAsync(contactDao, new PartitionKey(contactDao.Id));
             return response.Resource;
         }
+
+        internal async Task<IList<ContactDao>> GetContactsBatch(int limit)
+        {
+            string query = "select * from contacts c";
+            QueryDefinition queryDefinition = new(query);
+            using FeedIterator<ContactDao> feed = contactsContainer.GetItemQueryIterator<ContactDao>(
+                queryDefinition: queryDefinition,
+                requestOptions: new QueryRequestOptions() { MaxItemCount = limit }
+            );
+
+            List<ContactDao> results = new(limit);
+
+            while (feed.HasMoreResults)
+            {
+                FeedResponse<ContactDao> response = await feed.ReadNextAsync();
+
+                foreach (ContactDao item in response.Resource)
+                {
+                    results.Add(item);
+                }
+            }
+
+            return results;
+
+        }
     }
 }

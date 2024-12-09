@@ -14,4 +14,9 @@ public class ContactsBusinessLogic(ContactsManager contactsManager)
     {
         return await contactsManager.GetContactByIdAsync(id);
     }
+
+    internal async Task<IList<Contact>> GetContacts(int limit)
+    {
+        return await contactsManager.GetContacts(limit);
+    }
 }

@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
 import { signInWithGoogle } from "../firebaseConfig";
 import { useEffect } from "react";
-import MarketingPage from "./components/marketing-page/MarketingPage";
 
 const handleLogin = async () => {
   try {
@@ -29,7 +28,7 @@ function Home() {
           {'Login with Google'}
         </button>
       </div>
-      <MarketingPage/>
+      <>Home Page</>
     </>
   );
 }
