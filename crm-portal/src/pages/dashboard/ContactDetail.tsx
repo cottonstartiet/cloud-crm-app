@@ -5,23 +5,23 @@ import Loading from "../components/Loading";
 function ContactDetail() {
   const {id} = useParams();  
 
-  const response = useGetContact(id as string);
+  const {isError, isSuccess, data, isLoading, error} = useGetContact(id as string);
 
-  if (response.isLoading) {
+  if (isLoading) {
     return <Loading/>;
   }
 
-  if (response.isError) {
-    return <div>Error: {JSON.stringify(response.error)}</div>;
+  if (isError) {
+    return <div>Error: {JSON.stringify(error)}</div>;
   }
 
-  if (response.isSuccess) {
+  if (isSuccess) {
     return (
       <div>
         <h1>Contact Detail</h1>
-        <h1>Id: {response.data.id}</h1>
-        <h1>First Name: {response.data.firstName}</h1>
-        <h1>Last Name: {response.data.lastName}</h1>
+        <h1>Id: {data.id}</h1>
+        <h1>First Name: {data.firstName}</h1>
+        <h1>Last Name: {data.lastName}</h1>
       </div>
     );
   }
