@@ -4,18 +4,18 @@ import { IContact } from "../../types";
 import { useGetContacts } from "../../hooks/contactsApiHooks";
 
 function Contacts() {
-  const response = useGetContacts();
+  const {isLoading, isSuccess, data} = useGetContacts();
 
-  if (response.isLoading) {
+  if (isLoading) {
     return <Loading/>;
   }
 
-  if (response.isSuccess) {
+  if (isSuccess) {
     return (
       <div>
         <h1>All Contacts</h1>
         <h3>Click on a contact to edit it.</h3>
-        {response.data.map((contact: IContact) => (
+        {data.map((contact: IContact) => (
           <p key={contact.id}>
             <Link to={`${contact.id}`}>{contact.firstName} {contact.lastName}</Link>
           </p>
