@@ -1,3 +1,4 @@
+using CrmApi;
 using CrmApi.BusinessLogic;
 using CrmApi.Configurations;
 using CrmApi.Domain;
@@ -39,6 +40,7 @@ builder.Services.AddCors(options =>
 });
 
 WebApplication app = builder.Build();
+app.UseNormalizeHttpContext();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -49,11 +51,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors(corsPolicyName);
-
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
